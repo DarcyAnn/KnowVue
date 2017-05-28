@@ -1,0 +1,20 @@
+{
+  "name": "knowvue",
+  "version": "1.0.0",
+  "description": "knowvue",
+  "main": "knowvue1.js",
+  "dependencies": {
+    "babel-cli": "^6.24.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src -d lib"
+
+  },
+  "keywords": [
+    "vue"
+  ],
+  "author": "DarcyAnn",
+  "license": "MIT"
+}
