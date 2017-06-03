@@ -1,0 +1,43 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>动态数据绑定（五）</title>
+    </head>
+    <body>
+        <h2>动态数据绑定（五）</h2>
+        <p>这是“动态数据绑定”的最后一题了，希望你能坚持到最后。在第四题的基础上，我们考虑如何做到："当数据发生改变时，重新渲染 DOM。" 此目标又可以分为两层难度。</p>
+        <p>相对简单的目标：数据任意部分发生了变化，都重新渲染 DOM。</p>
+        <p>相对困难的目标：数据的某一部分发生了变动，只重新渲染对应这部分数据的 DOM。</p>
+        <pre>
+            let app = new Vue({
+            el: '#app',
+            data: {
+                user: {
+                    name: { 
+                        firstname: 'xiaoting',
+                        lastname: 'an'
+                    },
+                    age: 25
+                },
+                school: 'bupt',
+                major: 'computer'
+            }
+            });
+        </pre>
+            页面中原本的 html 模板片段:
+        <pre>
+            &lt;div id="app">
+                &lt;p>姓名：{{user.name}} &lt;/p>
+                &lt;p>年龄：{{user.age}} &lt;/p>
+            &lt;/div>
+        </pre>        
+        <p>相对简单的目标是说：无论是修改数据的哪一部分（包括没有在页面中出现的 school 和 major 这两部分），DOM 都会重新渲染。（即便前后渲染结果一致）</p>
+        <p>相对困难的目标是说：只有当 user.name 和 user.age 发生改变的时候，DOM 才会重新渲染；而 school 和 major 的变化不会引发重新渲染。</p>
+        <div id="app">
+            <p>姓：{{user.name.lastname}}</p>
+            <p>名：{{ user.name.firstname }}</P>
+            <p>年龄：{{user.age}}</p>
+        </div>
+        <script src="../src/knowvue5.js"></script>
+    </body>
+</html>
