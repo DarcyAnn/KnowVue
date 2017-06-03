@@ -1,0 +1,41 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>动态数据绑定（四）</title>
+    </head>
+    <body>
+        <h2>动态数据绑定（四）</h2>
+        <p>这是“动态数据绑定”的第四题。有了前面的充分准备，相信你能搞定这一题。请实现如下的这样一个 Vue，传入参数是一个 Selector 和一个数据对象，程序需要将 HTML 模板片段渲染成正确的模样。 这就是一次性的静态数据绑定。</p>
+        <pre>
+            let app = new Vue({
+            el: '#app',
+            data: {
+                user: {
+                name: 'youngwind',
+                age: 25
+                }
+            }
+            });
+        </pre>
+            页面中原本的 html 模板片段:
+        <pre>
+            &lt;div id="app">
+                &lt;p>姓名：{{user.name}} &lt;/p>
+                &lt;p>年龄：{{user.age}} &lt;/p>
+            &lt;/div>
+        </pre>        
+            最终在页面中渲染出来的结果:
+        <pre>
+            &lt;div id="app">
+                &lt;p>姓名：youngwind &lt;/p>
+                &lt;p>年龄：25< &lt;/p>
+            &lt;/div>
+        </pre>
+        <div id="app">
+            <p>姓：{{user.name.lastname}}</p>
+            <p>名：{{ user.name.firstname }}</P>
+            <p>年龄：{{user.age}}</p>
+        </div>
+        <script src="../src/knowvue4.js"></script>
+    </body>
+</html>
