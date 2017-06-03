@@ -8,6 +8,18 @@ function Vue(obj) {
 
 Vue.prototype.watchList = {};
 
+//初始化：为html中绑定数据的元素赋值
+Vue.prototype.init = function(obj) {
+    obj = obj || Vue.prototype.instance;
+    var el = document.getElementById(obj.el);
+    var childNodes = el.getElementsByTagName('*');
+    if(childNodes.length === 0) {
+        return false;
+    }
+    this.assignRec(obj, childNodes);
+}
+
+//递归DOM为其中的元素赋值
 Vue.prototype.assignRec = function(obj, childNodes) {
     for(var value of childNodes){
         if(value.getElementsByTagName('*').length !== 0){
@@ -28,16 +40,7 @@ Vue.prototype.assignRec = function(obj, childNodes) {
     }
 }
 
-Vue.prototype.init = function(obj) {
-    obj = obj || Vue.prototype.instance;
-    var el = document.getElementById(obj.el);
-    var childNodes = el.getElementsByTagName('*');
-    if(childNodes.length === 0) {
-        return false;
-    }
-    this.assignRec(obj, childNodes);
-}
-
+//触发事件
 Vue.prototype.$trigger = function () {
     var types = [].shift.call(arguments);
     var typeArr = types.split('.');
@@ -55,6 +58,7 @@ Vue.prototype.$trigger = function () {
     }
 }
 
+//添加监听事件
 Vue.prototype.$watch = function (type, fn) {
     var fns = Vue.prototype.watchList[type];
     if(!fns) {
@@ -63,6 +67,7 @@ Vue.prototype.$watch = function (type, fn) {
     Vue.prototype.watchList[type].push(fn);
 }
 
+//循环Vue实例data属性中每个元素，为其重新定义get和set函数
 Vue.prototype.circlebind = function (obj, path) {
     for(let key in obj) {
         if(obj.hasOwnProperty(key)) {
@@ -78,7 +83,7 @@ Vue.prototype.circlebind = function (obj, path) {
         }
     }
 }
-
+//重新定义get和set函数
 Vue.prototype.redefine = function (obj, key, value, path) {
     Object.defineProperty(obj, key, {
         enumerable: true,
