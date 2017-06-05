@@ -22,9 +22,9 @@ Vue.prototype.init = function(obj) {
 //递归DOM为其中的元素赋值
 Vue.prototype.assignRec = function(obj, childNodes) {
     for(var value of childNodes){
-        if(value.getElementsByTagName('*').length !== 0){
+        if(value.children.length !== 0){
             //如果还有子元素，递归
-            assignRec(value.getElementsByTagName('*'));
+            assignRec(value.children);
         } else {
             //如果没有子元素了，检查html内容
             value.originValue = value.originValue || value.textContent;
